@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Login · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="form-card">
+      <h1>Login</h1>
+
+      <div
+        id="msg"
+        class="notice"
+      ></div>
+
+      <form id="form">
+        <div class="field">
+          <label>Email</label>
+
+          <input
+            id="email"
+            type="email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+
+          <input
+            id="password"
+            type="password"
+            required
+          >
+        </div>
+
+        <button class="btn">
+          Login
+        </button>
+      </form>
+
+      <p class="muted">
+        No account?
+        <a href="/register.html">
+          Register
+        </a>
+      </p>
+
+      <div style="margin-top: 20px; padding: 14px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 13px; color: #475569;">
+        <div style="font-weight: 600; margin-bottom: 4px; color: #1e293b;">Default Admin Credentials:</div>
+        <div>Email: <code style="background:#e2e8f0;padding:2px 5px;border-radius:4px;">admin@swiftcart.com</code></div>
+        <div>Password: <code style="background:#e2e8f0;padding:2px 5px;border-radius:4px;">Admin123</code></div>
+      </div>
+    </main>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      document
+        .getElementById('form')
+        .addEventListener(
+          'submit',
+          async e => {
+            e.preventDefault();
+
+            try {
+              const res = await api('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                  email: email.value,
+                  password: password.value
+                })
+              });
+
+              if (res.user && res.user.role === 'ADMIN') {
+                location.href = '/admin.html';
+              } else {
+                location.href = '/';
+              }
+
+            } catch (err) {
+              msg.className = 'notice error show';
+              msg.textContent = err.message;
+            }
+          }
+        );
+    </script>
+  </body>
+</html>

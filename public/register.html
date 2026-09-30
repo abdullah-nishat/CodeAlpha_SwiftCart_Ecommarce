@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Register · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="form-card">
+      <h1>Create Account</h1>
+
+      <div
+        id="msg"
+        class="notice"
+      ></div>
+
+      <form id="form">
+        <div class="field">
+          <label>Full name</label>
+
+          <input
+            id="fullName"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+
+          <input
+            id="email"
+            type="email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+
+          <input
+            id="password"
+            type="password"
+            minlength="6"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Confirm password</label>
+
+          <input
+            id="confirmPassword"
+            type="password"
+            minlength="6"
+            required
+          >
+        </div>
+
+        <button class="btn">
+          Register
+        </button>
+      </form>
+    </main>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      document
+        .getElementById('form')
+        .addEventListener(
+          'submit',
+          async e => {
+            e.preventDefault();
+
+            try {
+              await api('/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                  fullName: fullName.value,
+                  email: email.value,
+                  password: password.value,
+                  confirmPassword: confirmPassword.value
+                })
+              });
+
+              location.href = '/';
+
+            } catch (err) {
+              msg.className = 'notice error show';
+              msg.textContent = err.message;
+            }
+          }
+        );
+    </script>
+  </body>
+</html>

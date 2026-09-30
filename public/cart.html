@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Cart · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="container section">
+      <div class="section-title">
+        <h1>Shopping Cart</h1>
+
+        <a
+          class="btn"
+          href="/checkout.html"
+        >
+          Checkout
+        </a>
+      </div>
+
+      <div id="cart"></div>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      async function loadCart() {
+        try {
+          const d = await api('/cart');
+
+          if (!d.items.length) {
+            cart.innerHTML =
+              '<div class="empty">Your cart is empty.</div>';
+
+            return;
+          }
+
+          cart.innerHTML = `
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  ${d.items
+                    .map(
+                      i => `
+                        <tr>
+                          <td>
+                            <img
+                              class="thumb"
+                              src="${i.imageUrl}"
+                            >
+                            ${i.name}
+                          </td>
+
+                          <td>
+                            ${money(i.finalPrice)}
+                          </td>
+
+                          <td>
+                            <input
+                              class="qty"
+                              type="number"
+                              min="1"
+                              max="${i.stock}"
+                              value="${i.quantity}"
+                              onchange="updateQty(${i.id},this.value)"
+                            >
+                          </td>
+
+                          <td>
+                            ${money(i.finalPrice * i.quantity)}
+                          </td>
+
+                          <td>
+                            <button
+                              class="btn danger"
+                              onclick="removeItem(${i.id})"
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      `
+                    )
+                    .join('')}
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style="text-align:right">
+              Subtotal: ${money(d.subtotal)}
+            </h3>
+          `;
+
+        } catch (e) {
+          if (e.message.includes('login')) {
+            location.href = '/login.html';
+          } else {
+            cart.innerHTML = `
+              <div class="empty">
+                ${e.message}
+              </div>
+            `;
+          }
+        }
+      }
+
+      async function updateQty(id, q) {
+        try {
+          await api('/cart/' + id, {
+            method: 'PATCH',
+            body: JSON.stringify({
+              quantity: Number(q)
+            })
+          });
+
+          loadCart();
+
+        } catch (e) {
+          alert(e.message);
+          loadCart();
+        }
+      }
+
+      async function removeItem(id) {
+        await api('/cart/' + id, {
+          method: 'DELETE'
+        });
+
+        loadCart();
+      }
+
+      document.addEventListener(
+        'DOMContentLoaded',
+        loadCart
+      );
+    </script>
+  </body>
+</html>

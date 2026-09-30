@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Checkout · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="form-card">
+      <h1>Checkout</h1>
+
+      <p class="muted">
+        Payment method: Cash on Delivery (COD)
+      </p>
+
+      <div
+        id="msg"
+        class="notice"
+      ></div>
+
+      <form id="form">
+        <div class="field">
+          <label>Name</label>
+
+          <input
+            id="customerName"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+
+          <input
+            id="email"
+            type="email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+
+          <input
+            id="phone"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Address</label>
+
+          <textarea
+            id="address"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label>City</label>
+
+          <input
+            id="city"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Postcode</label>
+
+          <input
+            id="postcode"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Order note (optional)</label>
+
+          <textarea id="note"></textarea>
+        </div>
+
+        <button class="btn">
+          Place Order
+        </button>
+      </form>
+    </main>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      document.addEventListener(
+        'DOMContentLoaded',
+        async () => {
+          const { user } = await api('/auth/me');
+
+          if (!user) {
+            return location.href = '/login.html';
+          }
+
+          customerName.value = user.fullName;
+          email.value = user.email;
+        }
+      );
+
+      form.addEventListener(
+        'submit',
+        async e => {
+          e.preventDefault();
+
+          try {
+            const d = await api('/orders/checkout', {
+              method: 'POST',
+              body: JSON.stringify({
+                customerName: customerName.value,
+                email: email.value,
+                phone: phone.value,
+                address: address.value,
+                city: city.value,
+                postcode: postcode.value,
+                note: note.value
+              })
+            });
+
+            msg.className = 'notice success show';
+
+            msg.textContent =
+              `Order ${d.order.orderNumber} placed successfully!`;
+
+            setTimeout(
+              () => location.href = '/orders.html',
+              700
+            );
+
+          } catch (err) {
+            msg.className = 'notice error show';
+            msg.textContent = err.message;
+          }
+        }
+      );
+    </script>
+  </body>
+</html>

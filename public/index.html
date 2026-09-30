@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SwiftCart</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <div data-nav></div>
+
+  <!-- Hero Banner Slider -->
+  <section class="hero-slider" id="heroSlider" aria-label="Featured Promotions">
+    <div class="slider-track" id="sliderTrack">
+
+      <!-- Slide 1: Tech & Audio -->
+      <div class="slide active" data-index="0">
+        <div class="slide-bg" style="background-image: url('/images/banner-tech.jpg');"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-container">
+          <div class="slide-content">
+            <span class="slide-badge">Audio & Electronics</span>
+            <h1 class="slide-title">High-Fidelity Audio & Precision Gear</h1>
+            <p class="slide-desc">
+              Experience clear sound, responsive mechanical switches, and smart wearables engineered for performance and durability.
+            </p>
+            <div class="slide-actions">
+              <a class="btn" href="/products.html?category=electronics">Shop Electronics</a>
+              <a class="btn secondary" href="/products.html">Explore Catalog</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Urban Fashion & Lifestyle -->
+      <div class="slide" data-index="1">
+        <div class="slide-bg" style="background-image: url('/images/banner-fashion.jpg');"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-container">
+          <div class="slide-content">
+            <span class="slide-badge gold">Urban Lifestyle</span>
+            <h1 class="slide-title">Functional Gear for Daily Movement</h1>
+            <p class="slide-desc">
+              Discover weather-resistant commuter backpacks, analog wristwatches, and essentials designed for campus and travel.
+            </p>
+            <div class="slide-actions">
+              <a class="btn" href="/products.html?category=fashion">Shop Fashion</a>
+              <a class="btn secondary" href="/products.html?category=lifestyle">Explore Lifestyle</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Home & Living -->
+      <div class="slide" data-index="2">
+        <div class="slide-bg" style="background-image: url('/images/banner-home.jpg');"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-container">
+          <div class="slide-content">
+            <span class="slide-badge emerald">Home & Workspace</span>
+            <h1 class="slide-title">Refined Lighting & Workspace Essentials</h1>
+            <p class="slide-desc">
+              Energy-efficient adjustable LED illumination and minimalist desk accessories designed for productive environments.
+            </p>
+            <div class="slide-actions">
+              <a class="btn" href="/products.html?category=home-living">Shop Home & Living</a>
+              <a class="btn secondary" href="/products.html">All Products</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="slider-arrow prev" id="sliderPrev" aria-label="Previous Slide">‹</button>
+    <button class="slider-arrow next" id="sliderNext" aria-label="Next Slide">›</button>
+
+    <!-- Indicators -->
+    <div class="slider-dots" id="sliderDots"></div>
+  </section>
+
+  <!-- Value Propositions / Trust Bar -->
+  <section class="features-bar">
+    <div class="container features-grid">
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        </div>
+        <div class="feature-info">
+          <h4>Free Delivery</h4>
+          <p>On orders over ৳3,000 nationwide</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+        </div>
+        <div class="feature-info">
+          <h4>Cash on Delivery</h4>
+          <p>Payment accepted at delivery</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="feature-info">
+          <h4>Fast Fulfillment</h4>
+          <p>Verified inventory ready to dispatch</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div class="feature-info">
+          <h4>Authentic Products</h4>
+          <p>100% verified original merchandise</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container section">
+
+    <div class="section-title">
+      <div>
+        <h2>Featured Products</h2>
+        <p class="muted" style="margin:4px 0 0 0;font-size:14px;">Selected catalog items with standard warranty</p>
+      </div>
+      <a class="btn secondary" href="/products.html" style="padding:8px 16px;font-size:14px;">View All Products</a>
+    </div>
+
+    <div id="featured" class="grid"></div>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script src="/js/common.js"></script>
+
+  <script>
+    // Hero Slider Controller
+    (function initSlider() {
+      const slider = document.getElementById('heroSlider');
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('sliderPrev');
+      const nextBtn = document.getElementById('sliderNext');
+      const dotsContainer = document.getElementById('sliderDots');
+
+      if (!slides.length) return;
+
+      let current = 0;
+      let timer = null;
+      const interval = 3500; // Faster auto-slide rotation
+
+      // Build dot indicators
+      dotsContainer.innerHTML = Array.from(slides)
+        .map((_, i) => `<button class="slider-dot ${i === 0 ? 'active' : ''}" data-dot="${i}" aria-label="Go to slide ${i + 1}"></button>`)
+        .join('');
+
+      const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+      function goToSlide(index) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+
+        current = (index + slides.length) % slides.length;
+
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function nextSlide() {
+        goToSlide(current + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(current - 1);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        timer = setInterval(nextSlide, interval);
+      }
+
+      function stopAutoPlay() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      // Event listeners
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        startAutoPlay();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        startAutoPlay();
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          const target = Number(e.target.dataset.dot);
+          goToSlide(target);
+          startAutoPlay();
+        });
+      });
+
+      // Pause on hover
+      slider.addEventListener('mouseenter', stopAutoPlay);
+      slider.addEventListener('mouseleave', startAutoPlay);
+
+      // Touch / swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+          nextSlide();
+          startAutoPlay();
+        } else if (touchEndX > touchStartX + threshold) {
+          prevSlide();
+          startAutoPlay();
+        }
+      }
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+          startAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+          startAutoPlay();
+        }
+      });
+
+      startAutoPlay();
+    })();
+
+    // Load Featured Products
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const products = await api("/products/featured/list");
+
+        document.getElementById("featured").innerHTML =
+          products.map(productCard).join("");
+
+      } catch (error) {
+        document.getElementById("featured").innerHTML =
+          '<div class="empty">Could not load products.</div>';
+      }
+    });
+  </script>
+
+</body>
+</html>

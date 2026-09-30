@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Wishlist · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="container section">
+      <h1>Wishlist</h1>
+
+      <div
+        id="list"
+        class="grid"
+      ></div>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      async function load() {
+        try {
+          const d = await api('/wishlist');
+
+          list.innerHTML = d.length
+            ? d
+                .map(
+                  p => `
+                    <article class="card">
+                      <img
+                        class="product-img"
+                        src="${p.imageUrl}"
+                      >
+
+                      <div class="card-body">
+                        <h3>
+                          ${p.name}
+                        </h3>
+
+                        <p class="price">
+                          ${money(finalPrice(p))}
+                        </p>
+
+                        <div class="actions">
+                          <button
+                            class="btn"
+                            onclick="addToCart(${p.productId})"
+                          >
+                            Add to cart
+                          </button>
+
+                          <button
+                            class="btn danger"
+                            onclick="removeW(${p.productId})"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  `
+                )
+                .join('')
+            : `
+              <div class="empty">
+                Wishlist is empty.
+              </div>
+            `;
+
+        } catch (e) {
+          if (e.message.includes('login')) {
+            location.href = '/login.html';
+          }
+        }
+      }
+
+      async function removeW(id) {
+        await api('/wishlist/' + id, {
+          method: 'DELETE'
+        });
+
+        load();
+      }
+
+      document.addEventListener(
+        'DOMContentLoaded',
+        load
+      );
+    </script>
+  </body>
+</html>

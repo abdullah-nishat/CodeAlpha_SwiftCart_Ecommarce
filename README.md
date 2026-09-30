@@ -96,9 +96,9 @@ SwiftCart_Ecommerce/
 
 ## 1. Prerequisites
 
-You already have Node.js installed. You also need PostgreSQL and pgAdmin.
+Already have Node.js installed. Also need PostgreSQL and pgAdmin.
 
-You do **not** install Express globally. Express will be installed inside this project by `npm install`.
+ Do **not** install Express globally. Express will be installed inside this project by `npm install`.
 
 Check Node/npm in VS Code terminal:
 
@@ -109,9 +109,7 @@ npm -v
 
 ## 2. Open the project
 
-Extract the ZIP, then in VS Code choose **File > Open Folder** and open `SwiftCart_Ecommerce`.
-
-Open **Terminal > New Terminal**. PowerShell is fine.
+Open **Terminal > New Terminal**.
 
 ## 3. Install packages
 
@@ -131,62 +129,13 @@ Using pgAdmin:
 4. Database name: `swiftcart`
 5. Save.
 
-Then open the **Query Tool** for `swiftcart`.
 
-Run the full content of:
-
-```text
-database/schema.sql
 ```
 
-Then run:
 
-```text
-database/seed.sql
 ```
 
-## 5. Create `.env`
-
-In the VS Code terminal:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Open `.env` and change your PostgreSQL password:
-
-```env
-PORT=5000
-SESSION_SECRET=my-swiftcart-secret-2026
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=YOUR_REAL_POSTGRES_PASSWORD
-DB_NAME=swiftcart
-```
-
-## 6. Create admin account
-
-After the database/schema exists:
-
-```powershell
-npm run create-admin
-```
-
-Default admin login:
-
-```text
-Email: admin@swiftcart.com
-Password: Admin123
-```
-
-You can create a custom admin:
-
-```powershell
-node src/scripts/create-admin.js yourmail@example.com YourPassword "Your Name"
-```
-
-## 7. Start the server
+## 5. Start the server
 
 Development mode (recommended):
 
@@ -212,10 +161,4 @@ Admin page after logging in as admin:
 http://localhost:5000/admin.html
 ```
 
-## Important
 
-Do not use VS Code Live Server for this project. The Express server already serves the HTML/CSS/JavaScript files and the API from the same port.
-
-If PostgreSQL says authentication failed, your `DB_PASSWORD` in `.env` is wrong.
-
-If port 5000 is busy, change `PORT=5001` and open `http://localhost:5001`.

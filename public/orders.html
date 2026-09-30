@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Orders · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="container section">
+      <h1>My Orders</h1>
+
+      <div id="orders"></div>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      document.addEventListener(
+        'DOMContentLoaded',
+        async () => {
+          try {
+            const d = await api('/orders/mine');
+
+            orders.innerHTML = d.length
+              ? `
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Order</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      ${d
+                        .map(
+                          o => `
+                            <tr>
+                              <td>
+                                ${o.orderNumber}
+                              </td>
+
+                              <td>
+                                <span class="badge">
+                                  ${o.status}
+                                </span>
+                              </td>
+
+                              <td>
+                                ${money(o.total)}
+                              </td>
+
+                              <td>
+                                ${new Date(
+                                  o.createdAt
+                                ).toLocaleDateString()}
+                              </td>
+                            </tr>
+                          `
+                        )
+                        .join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `
+              : `
+                <div class="empty">
+                  No orders yet.
+                </div>
+              `;
+
+          } catch (e) {
+            if (e.message.includes('login')) {
+              location.href = '/login.html';
+            }
+          }
+        }
+      );
+    </script>
+  </body>
+</html>

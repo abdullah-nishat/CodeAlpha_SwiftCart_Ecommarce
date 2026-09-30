@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Product · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="container section">
+      <div id="detail"></div>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="/js/common.js"></script>
+
+    <script>
+      document.addEventListener(
+        'DOMContentLoaded',
+        async () => {
+          const slug =
+            new URLSearchParams(location.search).get('slug');
+
+          try {
+            const p = await api(
+              '/products/' + encodeURIComponent(slug)
+            );
+
+            const fp = finalPrice(p);
+
+            document.getElementById('detail').innerHTML = `
+              <div class="two-col">
+                <img
+                  class="detail-img"
+                  src="${p.imageUrl}"
+                  alt="${p.name}"
+                >
+
+                <div>
+                  <span class="badge">
+                    ${p.categoryName}
+                  </span>
+
+                  <h1>
+                    ${p.name}
+                  </h1>
+
+                  <p class="muted">
+                    ${p.shortDescription}
+                  </p>
+
+                  <p>
+                    ${p.description}
+                  </p>
+
+                  <div style="display:flex;align-items:center;gap:6px;margin:10px 0 14px;font-size:14px;color:var(--text-muted);">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--color-primary)" stroke="var(--color-primary)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <strong style="color:var(--text);">${p.rating || '4.8'}</strong>
+                    <span>(${p.reviewCount || 48} verified reviews)</span>
+                  </div>
+
+                  <p>
+                    <span class="price">
+                      ${money(fp)}
+                    </span>
+
+                    ${
+                      p.discountPercent
+                        ? `
+                          <span class="old">
+                            ${money(p.price)}
+                          </span>
+                        `
+                        : ''
+                    }
+                  </p>
+
+                  <p>
+                    <strong>Stock:</strong>
+                    ${p.stock}
+                  </p>
+
+                  <div class="field">
+                    <label>
+                      Quantity
+                    </label>
+
+                    <input
+                      id="qty"
+                      type="number"
+                      min="1"
+                      max="${p.stock}"
+                      value="1"
+                    >
+                  </div>
+
+                  <div class="actions">
+                    <button
+                      class="btn"
+                      onclick="addToCart(
+                        ${p.id},
+                        Number(document.getElementById('qty').value)
+                      )"
+                    >
+                      Add to Cart
+                    </button>
+
+                    <button
+                      class="btn secondary"
+                      onclick="addWishlist(${p.id})"
+                    >
+                      Add to Wishlist
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+
+          } catch (e) {
+            document.getElementById('detail').innerHTML = `
+              <div class="empty">
+                ${e.message}
+              </div>
+            `;
+          }
+        }
+      );
+    </script>
+  </body>
+</html>

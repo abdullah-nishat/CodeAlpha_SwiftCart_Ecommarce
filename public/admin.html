@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Admin · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="container section">
+      <h1>Admin Dashboard</h1>
+
+      <div
+        id="adminMsg"
+        class="notice"
+      ></div>
+
+      <div
+        id="stats"
+        class="stats"
+      ></div>
+
+      <div class="section">
+        <div class="section-title">
+          <h2>Products</h2>
+
+          <button
+            class="btn"
+            onclick="toggleForm()"
+          >
+            Add Product
+          </button>
+        </div>
+
+        <div
+          id="productFormBox"
+          class="form-card"
+          style="display:none; max-width:none; margin:0 0 24px"
+        >
+          <form id="productForm">
+            <input
+              type="hidden"
+              id="editId"
+            >
+
+            <div class="two-col">
+              <div>
+                <div class="field">
+                  <label>Name</label>
+
+                  <input
+                    id="name"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label>Short description</label>
+
+                  <input
+                    id="shortDescription"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label>Description</label>
+
+                  <textarea
+                    id="description"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="field">
+                  <label>Category</label>
+
+                  <select
+                    id="categoryId"
+                    required
+                  ></select>
+                </div>
+              </div>
+
+              <div>
+                <div class="field">
+                  <label>Price</label>
+
+                  <input
+                    id="price"
+                    type="number"
+                    step="0.01"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label>Discount %</label>
+
+                  <input
+                    id="discountPercent"
+                    type="number"
+                    value="0"
+                  >
+                </div>
+
+                <div class="field">
+                  <label>Stock</label>
+
+                  <input
+                    id="stock"
+                    type="number"
+                    value="0"
+                  >
+                </div>
+
+                <div class="field">
+                  <label>Image</label>
+
+                  <input
+                    id="image"
+                    type="file"
+                    accept="image/*"
+                  >
+                </div>
+
+                <div class="field">
+                  <label>
+                    <input
+                      id="featured"
+                      type="checkbox"
+                    >
+                    Featured product
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn">
+              Save Product
+            </button>
+          </form>
+        </div>
+
+        <div id="products"></div>
+      </div>
+
+      <div class="section">
+        <h2>Orders</h2>
+
+        <div id="orders"></div>
+      </div>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>

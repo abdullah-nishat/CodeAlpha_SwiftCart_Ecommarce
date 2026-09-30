@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <title>Products · SwiftCart</title>
+
+    <link
+      rel="stylesheet"
+      href="/css/style.css"
+    >
+  </head>
+
+  <body>
+    <div data-nav></div>
+
+    <main class="container section">
+      <div class="section-title">
+        <div>
+          <h1>Explore Products</h1>
+          <p class="muted" style="margin: 4px 0 0 0; font-size: 14px;">Browse authentic electronics, fashion, and lifestyle items</p>
+        </div>
+        <span id="productCount" class="badge" style="font-size: 13px; padding: 6px 14px;">Loading products...</span>
+      </div>
+
+      <form
+        id="filters"
+        class="filters"
+      >
+        <input
+          id="search"
+          placeholder="Search by name or description..."
+        >
+
+        <select id="category">
+          <option value="">
+            All categories
+          </option>
+        </select>
+
+        <input
+          id="minPrice"
+          type="number"
+          min="0"
+          placeholder="Min ৳"
+        >
+
+        <input
+          id="maxPrice"
+          type="number"
+          min="0"
+          placeholder="Max ৳"
+        >
+
+        <select id="sort" title="Sort products">
+          <option value="newest">
+            Newest Arrivals
+          </option>
+
+          <option value="price_asc">
+            Price: Low to High
+          </option>
+
+          <option value="price_desc">
+            Price: High to Low
+          </option>
+
+          <option value="rating">
+            Top Rated
+          </option>
+        </select>
+
+        <div style="display:flex;gap:8px;">
+          <button class="btn" type="submit" title="Apply filter">
+            Filter
+          </button>
+          <button class="btn secondary" type="button" onclick="resetFilters()" title="Reset all filters">
+            Reset
+          </button>
+        </div>
+      </form>
+
+      <div
+        id="products"
+        class="grid"
+      ></div>
+
+      <div
+        id="pagination"
+        class="pagination"
+      ></div>
+    </main>
+
+    <div data-footer></div>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/products.js"></script>
+  </body>
+</html>
