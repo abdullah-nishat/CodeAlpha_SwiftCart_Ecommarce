@@ -9,7 +9,6 @@ SwiftCart is a complete beginner-friendly full-stack e-commerce store built to m
 - Image upload: Multer
 - Payment: Cash on Delivery only
 
-It intentionally does **not** use React, Next.js, TypeScript, NestJS, Pusher, Mailer, OTP, Google OAuth, or a payment gateway.
 
 ## Main features
 
